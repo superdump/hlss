@@ -52,6 +52,27 @@ various ways if not. This results in...
 
 And that's about it.
 
+## Installation
+
+### Dependencies
+
+* Python
+* gevent
+* Flask
+* pygi
+* GStreamer and plugins:
+    * Various sources, demuxers, parsers and decoders to support your
+      input files
+    * voaacenc
+    * x264enc
+    * mpegtsmux
+    * multifilesink
+
+TODO
+
+### Deployment
+
+TODO
 
 ## Caveats
 
