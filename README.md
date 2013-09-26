@@ -9,6 +9,35 @@ Stream A/V files from any format supported by GStreamer over HLS.
 HLSS is a very basic (at the time of writing) on-demand HLS streaming server
 that has been thrown together for educational purposes.
 
+## Dependencies
+
+* Python
+* gevent
+* Flask
+* pygi
+* GStreamer 1.x and plugins:
+    * Various sources, demuxers, parsers and decoders to support your
+      input files
+    * voaacenc
+    * x264enc
+    * mpegtsmux
+    * multifilesink
+
+## Installation
+
+Nothing to build, just clone it somewhere.
+
+## Usage
+
+```
+python /path/to/hlss.py /path/to/media/file
+```
+
+Connect to http://localhost:5000/ from a device that can play HLS streams and
+knows about the HLS playlist mime type - e.g. an iOS or Android device.
+
+Click the link to open the HLS stream in the media player of your choice.
+Alternatively copy the link and paste it into your HLS media player of choice.
 
 ## Why did you write it?
 
@@ -27,12 +56,6 @@ HLS streaming requires a few components:
 * Pixie dust
 
 The workflow is as follows:
-* Run script providing the path to the media file desired to be served
-* Connect to HTTP server (currently http://localhost:5000/ for testing) to get
-  the index page with a link to an HLS playlist for the media file
-* Click the link to open the HLS stream in the media player of your choice
-
-Here comes the fun part...
 * On the first GET request for the HLS playlist, a GStreamer pipeline is
   created that transcodes (dumbly - no transmuxing) whatever input media file
   you have to a regular HLS stream.
@@ -51,37 +74,3 @@ various ways if not. This results in...
   updates about newly-available segments.
 
 And that's about it.
-
-## Installation
-
-### Dependencies
-
-* Python
-* gevent
-* Flask
-* pygi
-* GStreamer and plugins:
-    * Various sources, demuxers, parsers and decoders to support your
-      input files
-    * voaacenc
-    * x264enc
-    * mpegtsmux
-    * multifilesink
-
-TODO
-
-### Deployment
-
-TODO
-
-## Caveats
-
-As this was done for educational purposes, the implementation is lacking:
-* awareness of sessions
-* error checking
-* code-cleanliness
-* security
-* clean-up of segment files using some kind of stale-ness
-* browseable directory structure in HTML instead of a single media 'Click me'
-  link
-* other bits and pieces to make it generally usable
